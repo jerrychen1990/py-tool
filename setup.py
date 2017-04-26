@@ -4,13 +4,13 @@
 # @Author  : xiaowa
 
 from setuptools import setup, find_packages
-import app
+import tools
 
 long_description = """ long desc """
 
 setup(
     name='bigdata-tools',
-    version=app.__version__,
+    version=tools.__version__,
     description='history-flush',
     long_description=long_description,
     classifiers=[
@@ -26,12 +26,12 @@ setup(
         "Programming Language :: Python :: 3.4",
         "Topic :: Documentation",
     ],
-    keywords='py-tools',
+    keywords='py-tool',
     author='jerrychen',
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'history-flush = app.history_flush:command_line_runner',
+            'history-flush = tools.history_flush:command_line_runner',
         ]
     },
     install_requires=[
