@@ -11,15 +11,15 @@ import subprocess
 
 def get_parser():
     parser = argparse.ArgumentParser(description='history flush commandline tool')
-    parser.add_argument('cmd', metavar='COMMAND', type=str,
+    parser.add_argument('cmd', metavar='command', type=str,
                         help='the command to execute')
-    parser.add_argument('-s', '--start_day', metavar='START_DAY', type=str,
+    parser.add_argument('-s', '--start_day', type=str,
                         help='the start day')
-    parser.add_argument('-e', '--end_day', metavar='END_DAY', type=str,
+    parser.add_argument('-e', '--end_day', type=str,
                         help='the end day')
     parser.add_argument('-t', '--test', help='just print instead of execute cmds', action="store_true")
 
-    parser.add_argument(dest='args', metavar='args', nargs='*')
+    parser.add_argument(dest='args', metavar='args', nargs='*', help='args for command except day')
 
     return parser
 

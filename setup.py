@@ -31,7 +31,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'history-flush = tools.history_flush:command_line_runner',
+            'history-flush = tools.cmds.history_flush:command_line_runner',
         ]
     },
     install_requires=[
