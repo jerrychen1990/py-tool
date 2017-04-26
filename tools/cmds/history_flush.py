@@ -38,6 +38,10 @@ def iter_cmd(start_day, end_day, cmd, test, args):
         iter_day = dateutil.date2str(iter_date, end_format)
         execute_cmd(args=args, day=iter_day, cmd=cmd, test=test)
         iter_date += datetime.timedelta(time_step)
+    # run end_date script
+    execute_cmd(args=args, day=end_day, cmd=cmd, test=test)
+
+
 
 
 def execute_cmd(args, cmd, day, test=False):
@@ -55,6 +59,7 @@ def command_line_runner():
     args = vars(parser.parse_args())
     print(args)
     iter_cmd(**args)
+    print("history-flush script finished!")
 
 
 if __name__ == '__main__':
