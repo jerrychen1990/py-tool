@@ -32,7 +32,9 @@ setup(
         entry_points={
             'console_scripts': [
                 'history-flush = tools.cmds.history_flush:command_line_runner',
-                'kafka-produce = tools.cmds.kafka_produce:command_line_runner'
+                'kafka-produce = tools.cmds.kafka_produce:command_line_runner',
+                'gsync = tools.cmds.gsync:command_line_runner'
+
             ]
         },
         install_requires=[
