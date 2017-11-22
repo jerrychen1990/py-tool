@@ -12,6 +12,7 @@
 
 import argparse
 import os
+import sys
 
 
 def get_parser():
@@ -21,11 +22,19 @@ def get_parser():
     return parser
 
 
+def do_execute(cmd):
+    rs = os.system(cmd)
+    if rs != 0:
+        print("fail to execute {}".format(cmd))
+        sys.exit(-1)
+
+
 def command_line_runner():
     parser = get_parser()
     args = vars(parser.parse_args())
     status_cmd = "git status"
-    os.system(status_cmd)
+    do_execute(status_cmd)
+
     answer = input(["are you sure to commit all the changed files? [Y/N]"])
     if not answer.upper() == 'Y':
         return
@@ -35,17 +44,24 @@ def command_line_runner():
         return
     add_cmd = "git add ."
     print("git adding")
-    os.system(add_cmd)
+    do_execute(add_cmd)
+
 
     cmt_cmd = 'git commit -m "{}"'.format(message)
     print("git committing")
-    os.system(cmt_cmd)
+    do_execute(cmt_cmd)
+
 
     push_cmd = "git push"
     print("git pushing")
-    os.system(push_cmd)
+    do_execute(push_cmd)
+
+
     print("git sync finished")
 
 
 if __name__ == '__main__':
     command_line_runner()
+
+    # rs = os.system("git push")
+    # print(rs)
