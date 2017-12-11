@@ -27,9 +27,9 @@ def send_message(topic, message, server):
         print(e)
 
 
-def do_produce(topic, f, expression, server, **kwargs):
+def do_produce(topic, file, expression, server, **kwargs):
     if not expression:
-        content = codecs.open(f, "r", "utf8").read()
+        content = codecs.open(file, "r", "utf8").read()
         message_list = content.split(u"\n")
         for message in message_list:
             send_message(server=server, topic=topic, message=message)
