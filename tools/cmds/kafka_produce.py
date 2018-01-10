@@ -9,6 +9,10 @@ from kafka.errors import KafkaError
 import argparse
 import codecs
 
+import numpy as np
+
+np.random
+
 
 def send_message(topic, message, server):
     if not server:
@@ -18,7 +22,7 @@ def send_message(topic, message, server):
     if type(message) == str:
         message = message.encode("utf8")
 
-    future = producer.send(topic, message)
+    future = producer.send(topic, key=topic.encode("utf8"), value=message)
 
     try:
         future.get(timeout=10)

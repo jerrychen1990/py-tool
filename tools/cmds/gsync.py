@@ -14,11 +14,14 @@ import argparse
 import os
 import sys
 
+DEFAULT_MESSAGE = u'sync'
 
 def get_parser():
     parser = argparse.ArgumentParser(description='git sync current commits to remote repository')
     parser.add_argument('-m', '--message', type=str,
                         help='commit messages')
+    parser.add_argument('-f', '--force', type=str,
+                        help='force commit, use default message=sync')
     return parser
 
 
@@ -35,13 +38,17 @@ def command_line_runner():
     status_cmd = "git status"
     do_execute(status_cmd)
 
-    answer = input(["are you sure to commit all the changed files? [Y/N]"])
-    if not answer.upper() == 'Y':
-        return
-    message = args.get("message", None)
-    if not message:
-        print("no commit message! use -m argument to input commit message")
-        return
+    is_force = args.get("force", None)
+    if not is_force:
+        answer = input(["are you sure to commit all the changed files? [Y/N]"])
+        if not answer.upper() == 'Y':
+            return
+        message = args.get("message", None)
+        if not message:
+            print("no commit message! use -m argument to input commit message")
+            return
+    message = args.get("message", DEFAULT_MESSAGE)
+
     add_cmd = "git add ."
     print("git adding")
     do_execute(add_cmd)
