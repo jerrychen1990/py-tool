@@ -4,7 +4,7 @@
 # @Author  : xiaowa
 
 
-#!/usr/bin/env python
+# !/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Time    : 11/21/17 6:19 PM
 # @Author  : xiaowa
@@ -16,11 +16,12 @@ import sys
 
 DEFAULT_MESSAGE = u'sync'
 
+
 def get_parser():
     parser = argparse.ArgumentParser(description='git sync current commits to remote repository')
-    parser.add_argument('-m', '--message', type=str,
+    parser.add_argument('-m', '--message', type=str, default=DEFAULT_MESSAGE,
                         help='commit messages')
-    parser.add_argument('-f', '--force', type=str,
+    parser.add_argument('-f', '--force', action='store_const', const=True,
                         help='force commit, use default message=sync')
     return parser
 
@@ -53,16 +54,13 @@ def command_line_runner():
     print("git adding")
     do_execute(add_cmd)
 
-
     cmt_cmd = 'git commit -m "{}"'.format(message)
     print("git committing")
     do_execute(cmt_cmd)
 
-
     push_cmd = "git push"
     print("git pushing")
     do_execute(push_cmd)
-
 
     print("git sync finished")
 
