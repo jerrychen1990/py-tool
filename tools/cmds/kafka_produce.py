@@ -11,6 +11,8 @@ import codecs
 
 import numpy as np
 
+import platform
+
 np.random
 
 
@@ -19,8 +21,16 @@ def send_message(topic, message, server):
         server = "127.0.0.1:9092"
     producer = KafkaProducer(bootstrap_servers=[server])
     # print(type(message))
-    if type(message) == str:
-        message = message.encode("utf8")
+
+    version = platform.python_version()
+    if version.startswith("2"):
+        if type(message) == unicode:
+            message = message.encode("utf8")
+    if version.startswith("3"):
+        if type(message) == str:
+            message = message.encode("utf8")
+
+
 
     future = producer.send(topic, key=topic.encode("utf8"), value=message)
 
